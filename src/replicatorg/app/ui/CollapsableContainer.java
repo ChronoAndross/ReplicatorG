@@ -47,8 +47,8 @@ public class CollapsableContainer extends JComponent {
 	
 	private static synchronized void initIcons(JComponent comp) {
 		if (collapsedIcon != null && expandedIcon != null) return;
-		collapsedIcon = new ImageIcon(Base.getImage("images/icon-collapsed.png", comp));
-		expandedIcon = new ImageIcon(Base.getImage("images/icon-expanded.png", comp));
+		collapsedIcon = new ImageIcon(Base.getImage("C:\\Users\\Andrew\\workspace\\replicatorg\\resources\\images/icon-collapsed.png", comp));
+		expandedIcon = new ImageIcon(Base.getImage("C:\\Users\\Andrew\\workspace\\replicatorg\\resources\\images/icon-expanded.png", comp));
 	}
 	
 	protected class Header extends JButton implements ActionListener {

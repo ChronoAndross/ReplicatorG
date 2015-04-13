@@ -35,7 +35,7 @@ public class OnboardParametersWindow extends JFrame {
 		super("Update Machine Options");
 		this.mainwin = mainwin;
 	
-		Image icon = Base.getImage("images/icon.gif", this);
+		Image icon = Base.getImage("C:\\Users\\Andrew\\workspace\\replicatorg\\resources\\images/icon.gif", this);
 		setIconImage(icon);
 		
 		setLayout(new MigLayout());

@@ -50,6 +50,7 @@ public class MachineStatusPanel extends BGPanel implements MachineListener {
 	static final private Color BG_READY = new Color(0x80, 0xff, 0x60);
 	static final private Color BG_BUILDING = new Color(0xff, 0xef, 0x00); // process yellow
 
+	MachineProgressEvent currentEvent;
 	
 	MachineStatusPanel() {
 		Font statusFont = Base.getFontPref("status.font","SansSerif,plain,12");
@@ -165,7 +166,7 @@ public class MachineStatusPanel extends BGPanel implements MachineListener {
 			/** Calculate the % of the build that is complete **/
 			double proportion = (double)event.getLines()/(double)event.getTotalLines();
 			double percentComplete = Math.round(proportion*10000.0)/100.0;
-	
+			currentEvent = event;
 			double remaining= event.getEstimated() * (1.0 - proportion);
 			if (event.getTotalLines() == 0) {
 				remaining = 0;
@@ -180,6 +181,11 @@ public class MachineStatusPanel extends BGPanel implements MachineListener {
 			
 			smallLabel.setText(s);
 		}
+	}
+	
+	public MachineProgressEvent getCurrentEvent()
+	{
+		return currentEvent;
 	}
 	
 	public void machineStateChanged(MachineStateChangeEvent evt) {

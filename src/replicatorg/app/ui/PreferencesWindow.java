@@ -173,7 +173,7 @@ public class PreferencesWindow extends JFrame implements GuiConstants {
 		super("Preferences");
 		setResizable(true);
 		
-		Image icon = Base.getImage("images/icon.gif", this);
+		Image icon = Base.getImage("C:\\Users\\Andrew\\workspace\\replicatorg\\resources\\images/icon.gif", this);
 		setIconImage(icon);
 		
 		JTabbedPane prefTabs = new JTabbedPane();

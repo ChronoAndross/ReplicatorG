@@ -102,10 +102,10 @@ public class EditorHeader extends BGPanel implements ActionListener {
 	
 	protected void initTabImages() {
 		if (selectedTabBg == null) {
-			selectedTabBg = Base.getImage("images/tab-selected.png", this);
+			selectedTabBg = Base.getImage("C:\\Users\\Andrew\\workspace\\replicatorg\\resources\\images/tab-selected.png", this);
 		}
 		if (regularTabBg == null) {
-			regularTabBg = Base.getImage("images/tab-regular.png", this);
+			regularTabBg = Base.getImage("C:\\Users\\Andrew\\workspace\\replicatorg\\resources\\images/tab-regular.png", this);
 		}
 	}
 

@@ -66,7 +66,7 @@ public class ScalingTool extends Tool {
 		});
 		p.add(b,"growx,wrap");
 		
-		b = createToolButton("inches->mm","images/center-object.png");
+		b = createToolButton("inches->mm","C:\\Users\\Andrew\\workspace\\replicatorg\\resources\\images/center-object.png");
 		b.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 				parent.getModel().scale(25.4d,parent.getModel().isOnPlatform());
@@ -74,7 +74,7 @@ public class ScalingTool extends Tool {
 		});
 		p.add(b,"growx,wrap");
 
-		b = createToolButton("mm->inches","images/center-object.png");
+		b = createToolButton("mm->inches","C:\\Users\\Andrew\\workspace\\replicatorg\\resources\\images/center-object.png");
 		b.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 				parent.getModel().scale(1d/25.4d,parent.getModel().isOnPlatform());

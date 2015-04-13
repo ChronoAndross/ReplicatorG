@@ -47,7 +47,7 @@ public class RealtimePanel extends JFrame implements ChangeListener, WindowListe
 
 	public RealtimePanel(MachineInterface machine2) {
 		super("Real time control and tuning");
-		Image icon = Base.getImage("images/icon.gif", this);
+		Image icon = Base.getImage("C:\\Users\\Andrew\\workspace\\replicatorg\\resources\\images/icon.gif", this);
 		setIconImage(icon);
 		
 		machine = machine2;

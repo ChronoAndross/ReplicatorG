@@ -126,7 +126,7 @@ public interface NotificationHandler {
 
 			popup.add(defaultItem);
 			// set the window icon
-			Image icon = Base.getImage("images/icon.gif", editor);
+			Image icon = Base.getImage("C:\\Users\\Andrew\\workspace\\replicatorg\\resources\\images/icon.gif", editor);
 
 			trayIcon = new TrayIcon(icon, editor.getTitle(), popup);
 			trayIcon.setImageAutoSize(true);

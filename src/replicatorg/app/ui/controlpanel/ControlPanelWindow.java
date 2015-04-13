@@ -117,7 +117,7 @@ public class ControlPanelWindow extends JFrame implements
 	private ControlPanelWindow(MachineInterface newMachine) {
 		super("Control Panel");
 
-		Image icon = Base.getImage("images/icon.gif", this);
+		Image icon = Base.getImage("C:\\Users\\Andrew\\workspace\\replicatorg\\resources\\images/icon.gif", this);
 		setIconImage(icon);
 		
 		// save our machine!

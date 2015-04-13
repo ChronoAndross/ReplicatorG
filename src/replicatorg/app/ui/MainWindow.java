@@ -69,6 +69,7 @@ import java.util.Date;
 import java.util.Iterator;
 import java.util.LinkedList;
 import java.util.List;
+import java.util.Map;
 import java.util.Vector;
 import java.util.logging.Level;
 import java.util.prefs.BackingStoreException;
@@ -160,6 +161,8 @@ import replicatorg.plugin.toolpath.skeinforge.SkeinforgePostProcessor;
 import replicatorg.plugin.toolpath.miraclegrue.MiracleGrueGenerator;
 import replicatorg.plugin.toolpath.miraclegrue.MiracleGruePostProcessor;
 import replicatorg.uploader.FirmwareUploader;
+import replicatorg.TOMIM.TOMIMCommunicator;
+import replicatorg.TOMIM.TOMIMThread;
 
 import com.apple.mrj.MRJAboutHandler;
 import com.apple.mrj.MRJApplicationUtils;
@@ -182,6 +185,8 @@ ToolpathGenerator.GeneratorListener
 
 	final static String MODEL_TAB_KEY = "MODEL";
 	final static String GCODE_TAB_KEY = "GCODE";
+	final static boolean CLOSE_INSULATION = true;
+	final static boolean OPEN_INSULATION = false;
 	// p5 icon for the window
 	Image icon;
 
@@ -231,6 +236,9 @@ ToolpathGenerator.GeneratorListener
 	public SimulationThread simulationThread;
 
 	public EstimationThread estimationThread;
+	
+	TOMIMCommunicator tComm = null; // singleton TOMIM instance
+	TOMIMThread tThread = null; // single TOMIMThread
 
 	JMenuItem saveMenuItem;
 	JMenuItem saveAsMenuItem;
@@ -312,7 +320,7 @@ ToolpathGenerator.GeneratorListener
 		mruList = MRUList.getMRUList();
 
 		// set the window icon
-		icon = Base.getImage("images/icon.gif", this);
+		icon = Base.getImage("C:\\Users\\Andrew\\workspace\\replicatorg\\resources\\images/icon.gif", this);
 		setIconImage(icon);
 
 		// add listener to handle window close box hit event
@@ -667,9 +675,22 @@ ToolpathGenerator.GeneratorListener
 
 		ToolpathGeneratorThread tgt = new ToolpathGeneratorThread(this, generator, build, skipConfig);
 		tgt.addListener(this);
+		System.out.println("Before thread");
 		tgt.start();
+		System.out.println("After Thread");
 
 	}
+	
+   public static void dumpAllStackTraces ()
+    {
+        for (Map.Entry <Thread, StackTraceElement []> entry: 
+            Thread.getAllStackTraces().entrySet ())
+        {
+            System.out.println (entry.getKey ().getName () + ":");
+            for (StackTraceElement element: entry.getValue ())
+                System.out.println ("\t" + element);
+        }
+    }
 
 	private boolean modelTooBig() {
 		/*
@@ -1803,7 +1824,7 @@ ToolpathGenerator.GeneratorListener
 	// so used internally for everything else
 
 	public void handleAbout() {
-		final Image image = Base.getImage("images/about.png", this);
+		final Image image = Base.getImage("C:\\Users\\Andrew\\workspace\\replicatorg\\resources\\images/about.png", this);
 		int w = image.getWidth(this);
 		int h = image.getHeight(this);
 		final Window window = new Window(this) {
@@ -2176,8 +2197,22 @@ ToolpathGenerator.GeneratorListener
 			
 			message("Building...");
 			buildStart = new Date();
+			// TOMIM call
+			Base.logger.info("Connecting to TOMIM.");
+			tComm = null; // deallocate tComm reference	
+			tComm = new TOMIMCommunicator(CLOSE_INSULATION);
+			tComm.beginCommunication();
+			if (tComm.isConnected())
+			{
+				tComm.outputByte();
+				tComm.listenForEnd(); // listens for end of traversal
+				Base.logger.info("Disconnected from TOMIM");
+			}
+			
 			
 			machineLoader.getMachineInterface().buildDirect(new JEditTextAreaSource(textarea));
+			tThread = new TOMIMThread(tComm, machineStatusPanel);
+			tThread.start();
 			//doing this check allows us to recover from pre-build stuff
 //			if(machineLoader.getMachineInterface().buildDirect(new JEditTextAreaSource(textarea)) == false)
 //			{
@@ -2614,7 +2649,21 @@ ToolpathGenerator.GeneratorListener
 	}
 
 	// synchronized public void buildingOver()
-	public void buildingOver() {
+	public void buildingOver() 
+	{
+		// This code is in TOMIMThread now.
+		/*Base.logger.info("Connecting to TOMIM.");
+		if (tComm != null)
+		{
+			tComm.setSignal(OPEN_INSULATION);;
+			tComm.beginCommunication();
+			if (tComm.isConnected())
+			{
+				tComm.outputByte();
+				tComm.listenForEnd(); // listens for end of traversal
+				Base.logger.info("Disconnected to TOMIM");
+			}
+		}*/
 		message("Done building.");
 
 		// re-enable the gui and shit.
@@ -2744,7 +2793,25 @@ ToolpathGenerator.GeneratorListener
 	 *  Disables pre-heating, and sets building values to false/off
 	 */
 	public void doStop() {
-		if (machineLoader.isLoaded()) {
+		if (machineLoader.isLoaded()) 
+		{
+			tThread.terminate(); 
+			Base.logger.info("Terminated Current TOMIMThread.");
+			
+			// TOMIM call
+			Base.logger.info("Connecting to TOMIM.");
+			if (tComm != null)
+			{
+				tComm.setSignal(OPEN_INSULATION);;
+				tComm.beginCommunication();
+				if (tComm.isConnected())
+				{
+					tComm.outputByte();
+					tComm.listenForEnd(); // listens for end of traversal
+					Base.logger.info("Disconnected from TOMIM");
+				}
+			}
+			
 			machineLoader.getMachineInterface().stopAll();
 		}
 		doPreheat(false);
@@ -2770,7 +2837,24 @@ ToolpathGenerator.GeneratorListener
 	 * Pause the applet but don't kill its window.
 	 */
 	public void doPause() {
-		if (machineLoader.getMachineInterface().isPaused()) {
+		if (machineLoader.getMachineInterface().isPaused()) 
+		{
+			tThread.terminate();
+			Base.logger.info("Terminated Current TOMIMThread.");
+			// TOMIM call
+			Base.logger.info("Connecting to TOMIM.");
+			if (tComm != null)
+			{
+				tComm.setSignal(OPEN_INSULATION);;
+				tComm.beginCommunication();
+				if (tComm.isConnected())
+				{
+					tComm.outputByte();
+					tComm.listenForEnd(); // listens for end of traversal
+					Base.logger.info("Disconnected to TOMIM");
+				}
+			}
+			
 			machineLoader.getMachineInterface().getDriver().unpause();
 
 			if (simulating) {

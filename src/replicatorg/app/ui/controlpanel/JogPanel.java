@@ -82,7 +82,7 @@ public class JogPanel extends JPanel implements ActionListener, MouseListener
 		
 		public final MachineInterface machine;
 		
-		public String buttonFolder = "images/jog/";
+		public String buttonFolder = "C:\\Users\\Andrew\\workspace\\replicatorg\\resources\\images/jog/";
 		
 		public String overButtonString = "Over";
 		public String pressedButtonString = "Down";
@@ -139,7 +139,7 @@ public class JogPanel extends JPanel implements ActionListener, MouseListener
 		
 		public DefaultArrangement(MachineInterface machine) {
 			super(machine);
-			buttonFolder = "images/jog/original/";
+			buttonFolder = "C:\\Users\\Andrew\\workspace\\replicatorg\\resources\\images/jog/original/";
 			
 			xScale = 1;
 			yScale = 1;
@@ -210,7 +210,7 @@ public class JogPanel extends JPanel implements ActionListener, MouseListener
 		
 		public MakerbotArrangement(MachineInterface machine) {
 			super(machine);
-			buttonFolder = "images/jog/makerbot/";
+			buttonFolder = "C:\\Users\\Andrew\\workspace\\replicatorg\\resources\\images/jog/makerbot/";
 
 			xScale = .5;
 			yScale = .5;
@@ -567,7 +567,7 @@ public class JogPanel extends JPanel implements ActionListener, MouseListener
 	private JPanel makeRotationPanel(AxisId axis) {
 		ButtonArrangement arrangement = new ButtonArrangement(machine){
 			{
-				buttonFolder = "images/jog/original/";
+				buttonFolder = "C:\\Users\\Andrew\\workspace\\replicatorg\\resources\\images/jog/original/";
 				xScale = 1;
 				yScale = 1;
 			}

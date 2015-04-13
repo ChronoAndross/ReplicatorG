@@ -38,7 +38,7 @@ public class MoveTool extends Tool {
 	
 	public JPanel getControls() {
 		JPanel p = new JPanel(new MigLayout("fillx,filly,gap 0"));
-		JButton centerButton = createToolButton("Center","images/center-object.png");
+		JButton centerButton = createToolButton("Center","C:\\Users\\Andrew\\workspace\\replicatorg\\resources\\images/center-object.png");
 		centerButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 				parent.getModel().center();
@@ -46,7 +46,7 @@ public class MoveTool extends Tool {
 		});
 		p.add(centerButton,"growx,wrap,spanx");
 
-		JButton lowerButton = createToolButton("Put on platform","images/center-object.png");
+		JButton lowerButton = createToolButton("Put on platform","C:\\Users\\Andrew\\workspace\\replicatorg\\resources\\images/center-object.png");
 		lowerButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 				parent.getModel().putOnPlatform();

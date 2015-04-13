@@ -25,7 +25,7 @@ public class ViewTool extends Tool {
 	public JPanel getControls() {
 		JPanel p = new JPanel(new MigLayout("fillx,gap 0,wrap 2","[50%]0[50%]"));
 		JButton b;
-		b = createToolButton("Default","images/center-object.png");
+		b = createToolButton("Default","C:\\Users\\Andrew\\workspace\\replicatorg\\resources\\images/center-object.png");
 		b.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 				parent.preview.resetView();
@@ -33,7 +33,7 @@ public class ViewTool extends Tool {
 		});
 		p.add(b,"growx,growy");
 
-		b = createToolButton("XY","images/center-object.png");
+		b = createToolButton("XY","C:\\Users\\Andrew\\workspace\\replicatorg\\resources\\images/center-object.png");
 		b.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 				parent.preview.viewXY();
@@ -41,7 +41,7 @@ public class ViewTool extends Tool {
 		});
 		p.add(b,"growx,growy");
 
-		b = createToolButton("XZ","images/center-object.png");
+		b = createToolButton("XZ","C:\\Users\\Andrew\\workspace\\replicatorg\\resources\\images/center-object.png");
 		b.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 				parent.preview.viewXZ();
@@ -49,7 +49,7 @@ public class ViewTool extends Tool {
 		});
 		p.add(b,"growx,growy");
 
-		b = createToolButton("YZ","images/center-object.png");
+		b = createToolButton("YZ","C:\\Users\\Andrew\\workspace\\replicatorg\\resources\\images/center-object.png");
 		b.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 				parent.preview.viewYZ();

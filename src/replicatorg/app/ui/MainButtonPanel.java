@@ -166,33 +166,33 @@ public class MainButtonPanel extends BGPanel implements MachineListener, ActionL
 		Font statusFont = Base.getFontPref("buttons.status.font","SansSerif,plain,12");
 		Color statusColor = Base.getColorPref("buttons.status.color","#FFFFFF");
 
-
-		buildButton = makeButton("Build", "images/button-build.png");
+		//System.out.println(System.getProperty("user.dir"));
+		buildButton = makeButton("Build", "C:\\Users\\Andrew\\workspace\\replicatorg\\resources\\images\\button-build.png");
 		add(buildButton);
 
-		playbackButton = makeButton("Build from SD card currently in printer", "images/button-playback.png");
+		playbackButton = makeButton("Build from SD card currently in printer", "C:\\Users\\Andrew\\workspace\\replicatorg\\resources\\images/button-playback.png");
 		add(playbackButton);
-		fileButton = makeButton("Build to file for use with SD card", "images/button-to-file.png");
+		fileButton = makeButton("Build to file for use with SD card", "C:\\Users\\Andrew\\workspace\\replicatorg\\resources\\images/button-to-file.png");
 		add(fileButton);
-		generateButton = makeButton("Model to GCode", "images/button-to-gcode.png");
+		generateButton = makeButton("Model to GCode", "C:\\Users\\Andrew\\workspace\\replicatorg\\resources\\images/button-to-gcode.png");
 		add(generateButton);
 
-		pauseButton = makeButton("Pause", "images/button-pause.png");
+		pauseButton = makeButton("Pause", "C:\\Users\\Andrew\\workspace\\replicatorg\\resources\\images/button-pause.png");
 		add(pauseButton,"gap unrelated");
-		stopButton = makeButton("Stop", "images/button-stop.png");
+		stopButton = makeButton("Stop", "C:\\Users\\Andrew\\workspace\\replicatorg\\resources\\images/button-stop.png");
 		add(stopButton);
 
 
-		cpButton = makeButton("Control panel", "images/button-control-panel.png");
-		rcButton = makeButton("Live tuning", "images/button-realtime-panel.png");
+		cpButton = makeButton("Control panel", "C:\\Users\\Andrew\\workspace\\replicatorg\\resources\\images/button-control-panel.png");
+		rcButton = makeButton("Live tuning", "C:\\Users\\Andrew\\workspace\\replicatorg\\resources\\images/button-realtime-panel.png");
 		add(cpButton,"gap unrelated");
 		add(rcButton, "hidemode 1");
 		
-		resetButton = makeButton("Reset machine", "images/button-reset.png");
+		resetButton = makeButton("Reset machine", "C:\\Users\\Andrew\\workspace\\replicatorg\\resources\\images/button-reset.png");
 		add(resetButton,"gap unrelated");
-		connectButton = makeButton("Connect", "images/button-connect.png");
+		connectButton = makeButton("Connect", "C:\\Users\\Andrew\\workspace\\replicatorg\\resources\\images/button-connect.png");
 		add(connectButton,"gap unrelated");
-		disconnectButton = makeButton("Disconnect", "images/button-disconnect.png");
+		disconnectButton = makeButton("Disconnect", "C:\\Users\\Andrew\\workspace\\replicatorg\\resources\\images/button-disconnect.png");
 		add(disconnectButton);
 
 		statusLabel = new JLabel();

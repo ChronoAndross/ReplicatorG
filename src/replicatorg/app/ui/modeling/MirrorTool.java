@@ -29,7 +29,7 @@ public class MirrorTool extends Tool {
 	JPanel getControls() {
 		JPanel p = new JPanel(new MigLayout("fillx,filly"));
 		JButton b;
-		b = createToolButton("Reflect in X","images/center-object.png");
+		b = createToolButton("Reflect in X","C:\\Users\\Andrew\\workspace\\replicatorg\\resources\\images/center-object.png");
 		b.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 				parent.getModel().mirrorX();
@@ -37,7 +37,7 @@ public class MirrorTool extends Tool {
 		});
 		p.add(b,"growx,wrap");
 
-		b = createToolButton("Reflect in Y","images/center-object.png");
+		b = createToolButton("Reflect in Y","C:\\Users\\Andrew\\workspace\\replicatorg\\resources\\images/center-object.png");
 		b.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 				parent.getModel().mirrorY();
@@ -45,7 +45,7 @@ public class MirrorTool extends Tool {
 		});
 		p.add(b,"growx,wrap");
 
-		b = createToolButton("Reflect in Z","images/center-object.png");
+		b = createToolButton("Reflect in Z","C:\\Users\\Andrew\\workspace\\replicatorg\\resources\\images/center-object.png");
 		b.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 				parent.getModel().mirrorZ();
