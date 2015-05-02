@@ -1,9 +1,9 @@
 /* TOMIM_microcontroller
-    By Andrew Gorbaty
-    Adapted from Servo and blink examples in Arduino API. Also adapted from adafruit website and for MLX temperature sensor provided by Sparkfun.
+  Edited by Andrew Gorbaty for Thing-O-Matic Improvement Module (TOMIM).    
+  Adapted from Servo and blink examples in Arduino API. 
+  Also adapted from adafruit website and for MLX temperature sensor provided by Sparkfun.
     
-    2015.
- http://arduino.cc/en/Tutorial/Sweep
+  2015.
 */ 
 
 #include <i2cmaster.h>
@@ -27,6 +27,8 @@ int recievedByte = 0;
 
 #define LCD_X     84
 #define LCD_Y     48
+
+char string[20];
 
 static const byte ASCII[][5] =
 {
@@ -179,22 +181,6 @@ void LcdWrite(byte dc, byte data)
   digitalWrite(PIN_SCE, HIGH);
 }
 
-void serialFloatPrint(float f) {
-  byte * b = (byte *) &f;
-  Serial.write(b[0]);
-  Serial.write(b[1]);
-  Serial.write(b[2]);
-  Serial.write(b[3]);
-  /* DEBUG 
-  Serial.println();
-  Serial.print(b[0],BIN);
-  Serial.print(b[1], BIN);
-  Serial.print(b[2], BIN);
-  Serial.println(b[3], BIN);
-  */
-}
-
-
 
 void turn_servo()
 {
@@ -236,7 +222,6 @@ void setup()
   LcdInitialise();
   LcdClear();
   LcdString("Welcome to TOMIM!");
-  //myservo.attach(9);  
   myservo.attach(SERVOPIN);// attaches the servo on pin 9 to the servo object
   myservo.write(180);
   pinMode(LIGHTOUT1, OUTPUT);
@@ -281,13 +266,13 @@ void loop()
   
   turn_servo();
   float temp = getTemp();
-  LcdString("Welcome to TOMIM!");
-  //char string [] = {'C', 'e', 'l', 'c', 'i', 'u', 's', ':', ' ',' ', ' ', ' ', ' ', '\0'};
-  //string[8] = (char)temp;
-  //LcdString(string);
-  //Serial.print("Celcius: ");
- // Serial.println(temp);
-  //switch_light(temp);
+  LcdInitialise();
+  LcdClear();
+  
+  sprintf(string, "Celcius: %d", (int)temp);
+  LcdString("Welcome to TOMIM        ");
+  LcdString(string);
+
   delay(1000);
   
   recievedByte = 0; // reset byte to keep it from entering statements
